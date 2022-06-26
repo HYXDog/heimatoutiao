@@ -32,7 +32,7 @@ const routes = [
       }
     ]
   },
-  { path: 'login', comment: Login }
+  { path: '/login', component: Login }
 ]
 
 const router = new VueRouter({

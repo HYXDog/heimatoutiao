@@ -6,7 +6,9 @@ import store from './store'
 import '@/styles/icon.less'
 // 引入vant
 import Vant from 'vant'
-import 'vant/lib/index.css'
+import 'vant/lib/index.less'
+import 'amfe-flexible'
+// 引入axios
 
 Vue.use(Vant)
 Vue.config.productionTip = false
