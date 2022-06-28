@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="登录" left-arrow>
+    <van-nav-bar title="登录" @click-left="$router.back()">
       <van-icon name="cross" slot="left"></van-icon>
     </van-nav-bar>
     <!-- 表单 -->
@@ -15,7 +15,8 @@
           { pattern: /^(?:(?:\+|00)86)?1\d{10}$/, message: '不符合手机的格式' },
         ]"
       >
-        <i class="toutiao toutiao-shouji" slot="left-icon"></i>
+        <!-- <i class="toutiao toutiao-shouji" slot="left-icon"></i> -->
+        <Myicon name="shouji" slot="left-icon"></Myicon>
       </van-field>
       <van-field
         v-model="code"
@@ -28,7 +29,8 @@
           { pattern: /\d{6}$/, message: '验证码长度必须是6位' },
         ]"
       >
-        <i class="toutiao toutiao-yanzhengma" slot="left-icon"></i>
+        <!-- <i class="toutiao toutiao-yanzhengma" slot="left-icon"></i> -->
+        <Myicon name="yanzhengma" slot="left-icon"></Myicon>
         <template #button>
           <van-count-down
             :time="time"
@@ -57,11 +59,12 @@
 
 <script>
 import { getSmsCode, login } from '@/api/user'
+import Myicon from '@/components/Myicon.vue'
 export default {
   created () { },
   data () {
     return {
-      mobile: '13911111111',
+      mobile: '',
       code: '246810',
       time: 5 * 1000,
       flag: false
@@ -72,8 +75,9 @@ export default {
       console.log('submit', values)
       try {
         const res = await login(values)
-        console.log(res)
-        this.$store.commit('setUser', res.data.date)
+        this.$store.commit('setUser', res.data.data)
+        // 跳转到我的
+        this.$router.push({ name: 'my' })
       } catch (error) {
         console.log(error)
       }
@@ -82,11 +86,9 @@ export default {
     async onSendSms () {
       try {
         await this.$refs.from.validate('mobile')
-        console.log('校验通过')
         this.flag = true
         try {
-          const res = await getSmsCode(this.mobile)
-          console.log(res)
+          await getSmsCode(this.mobile)
         } catch (error) {
           console.log(error)
         }
@@ -99,7 +101,7 @@ export default {
   computed: {},
   watch: {},
   filters: {},
-  components: {}
+  components: { Myicon }
 }
 </script>
 

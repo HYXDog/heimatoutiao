@@ -27,6 +27,8 @@ const routes = [
         component: Question
       },
       {
+        // 我的页面
+        name: 'my',
         path: 'my',
         component: My
       }
