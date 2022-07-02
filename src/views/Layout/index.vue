@@ -1,8 +1,10 @@
 <template>
   <div>
-    <router-view class="main"></router-view>
+    <keep-alive :include="['Home']">
+      <router-view class="main"></router-view>
+    </keep-alive>
     <van-tabbar v-model="active">
-      <van-tabbar-item to="/home" icon="home-o"
+      <van-tabbar-item to="/home" icon="home-o" class="active-color"
         >首页<i class="toutiao toutiao-shouye" slot="icon"></i
       ></van-tabbar-item>
       <van-tabbar-item to="/video" icon="search"
@@ -41,7 +43,8 @@ export default {
 /deep/ .van-tabbar-item__text {
   font-size: 20px !important;
 }
-.main{background-color: #f5f7f9;
+.main {
+  background-color: #f5f7f9;
   padding-bottom: 100px;
 }
 </style>

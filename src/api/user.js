@@ -1,4 +1,4 @@
-import store from '@/store'
+
 import request from '@/utils/request'
 // 只有在vue组件中文件才能使用this.$store
 export const getSmsCode = (mobile) => {
@@ -26,9 +26,6 @@ export const login = ({ mobile, code }) => {
 // 获取用户个人资料
 export const getUserInfo = () => {
   return request({
-    url: 'user',
-    headers: {
-      Authorization: 'Bearer ' + store.state.user.token
-    }
+    url: 'user'
   })
 }
